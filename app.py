@@ -4,7 +4,7 @@ from tensorflow.keras.models import load_model
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)  # 👈 Add this line to enable CORS
+CORS(app)  # Add this line to enable CORS
 
 model = load_model("new_hand_landmark_classifier.h5", compile=False)
 label_map = ['Ardhapathaka', 'Kartarimukha', 'Mayura', 'Pathaka', 'Tripathaka']
