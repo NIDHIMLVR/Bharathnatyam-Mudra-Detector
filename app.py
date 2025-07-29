@@ -1,13 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from tensorflow.keras.models import load_model
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)  # Add this line to enable CORS
+CORS(app)
 
 model = load_model("new_hand_landmark_classifier.h5", compile=False)
 label_map = ['Ardhapathaka', 'Kartarimukha', 'Mayura', 'Pathaka', 'Tripathaka']
+
+@app.route('/')
+def home():
+    return render_template("index.html")  # Serve the frontend HTML
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -27,12 +31,10 @@ def predict():
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-@app.route('/')
-def home():
-    return "Bharatanatyam Mudra Detection App is Running!"
 
 @app.route('/health')
 def health():
     return "ok", 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
