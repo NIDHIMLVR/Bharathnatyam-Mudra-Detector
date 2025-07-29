@@ -100,9 +100,9 @@
 }
 
 </style>
-<div class="container">
-<body>
 
+<body>
+<div class="container">
     <h2>Hastantrika</h2>
     <h3>Hand Mudra Recognition</h3>
 
@@ -117,7 +117,8 @@
     Unable to access camera. Please check browser permissions.
     </p>
 
-        <video id="input_video" width="640" height="480" autoplay muted></video>
+        <video id="input_video" playsinline width="640" height="480" autoplay muted></video>
+
         <canvas id="output_canvas" width="640" height="480"></canvas>
     </div>
 <h2 id="result">Prediction: ...</h2>
@@ -272,7 +273,7 @@
 
                 if (keypoints.length === 63) {
                     try {
-                        const response = await fetch("/predict", {
+                        const response = await fetch(window.location.origin+"/predict", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
@@ -338,9 +339,9 @@
             document.getElementById('video-overlay').style.display = 'flex';
         });
     </script>
-
-</body>
 </div>
+
+
 <footer>
     <p>© 2025 Hastantrika | Created by Nidhi M R</p>
     <p>Contact:nidhirameshmb@gmail.com</p>
@@ -358,4 +359,5 @@ footer {
 }
 
 </style>
+</body>
 </html>
