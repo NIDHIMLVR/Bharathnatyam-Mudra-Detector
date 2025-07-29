@@ -9,7 +9,7 @@ CORS(app)  # 👈 Add this line to enable CORS
 
 model = load_model("new_hand_landmark_classifier.h5", compile=False)
 label_map = ['Ardhapathaka', 'Kartarimukha', 'Mayura', 'Pathaka', 'Tripathaka']
-
+@app.route('/')
 def home():
     return render_template('index.html')
 @app.route('/predict', methods=['POST'])
