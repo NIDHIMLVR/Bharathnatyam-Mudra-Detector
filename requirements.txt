@@ -5,3 +5,5 @@ tensorflow-io-gcs-filesystem==0.32.0
 numpy>=1.21,<2.0
 h5py>=3.7,<3.10
 requests>=2.25,<3.0
+gunicorn
+
