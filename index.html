@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hastantrika</title>
+    <link rel="icon" type="image/png" href="iconmage.webp" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: black;
+        color: white;
+    }
+    #video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 4 / 3;
+    margin: auto;
+    border: 2px solid #ccc;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+
+    #video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 640px;
+    height: 480px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    }
+
+    #input_video, #output_canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1;
+   }
+    #startBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px 10px;
+        color:black;
+        background-color: red;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    #startBtn:hover {
+        background-color: rgb(0, 255, 76);
+        color: white;
+    }
+    #stopBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px 10px;
+        color: black;
+        background-color: red;
+        
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    #stopBtn:hover {
+        background-color: green;
+        color: white;
+    }
+    @media (max-width: 600px) {
+    #startBtn, #stopBtn {
+        width: 100%;
+        font-size: 18px;
+    }
+}
+
+
+    #result {
+        font-size: 20px;
+        font-weight: bold;
+        color: #00ff00; /* Green for prediction */
+        margin-top: 20px;
+    }
+
+    #input_video, #output_canvas, #video-overlay {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+</style>
+<div class="container">
+<body>
+
+    <h2>Hastantrika</h2>
+    <h3>Hand Mudra Recognition</h3>
+
+    <button id="startBtn">Start Camera</button>
+    <button id="stopBtn" style="display:none;">Stop Camera</button>
+
+    <div id="video-wrapper">
+        <div id="video-overlay">
+        <p>Click "Start Camera" to begin</p>
+    </div>
+    <p id="camera-error" style="color: red; display: none; font-weight: bold; margin-top: 10px;">
+    Unable to access camera. Please check browser permissions.
+    </p>
+
+        <video id="input_video" width="640" height="480" autoplay muted></video>
+        <canvas id="output_canvas" width="640" height="480"></canvas>
+    </div>
+<h2 id="result">Prediction: ...</h2>
+<h3>This system works only for the below 5 hasta mudras</h3>
+
+<div class="mudra-box">
+  <div class="mudra-header" onclick="toggleMudra(this)">
+    <span class="arrow">&#9654;</span>
+    <span class="mudra-title">Pataka Mudra</span>
+  </div>
+  <div class="mudra-content">
+    <img src="images/pathaka.jpg" width="200" height="200" alt="Pathaka Mudra">
+    <div class="mudra-description">
+      This mudra represents a wide range of meanings, including the sky, mountains, a flag, a river, and various actions like starting a dance, denoting the wind, or indicating a cutting action.
+    </div>
+  </div>
+</div>
+<div class="mudra-box">
+  <div class="mudra-header" onclick="toggleMudra(this)">
+    <span class="arrow">&#9654;</span>
+    <span class="mudra-title">Tripathaka Mudra</span>
+  </div>
+  <div class="mudra-content">
+    <img src="images/tripathaka.jpeg" width="200" height="200" alt="Tripathaka Mudra">
+    <div class="mudra-description">
+      It's used to represent a variety of concepts, including royal elements like a crown or king, trees, Indra (a deity), the weapon Vajra, a Ketaki flower, a lamp, flames of fire, a pigeon, and even actions like writing, drawing patterns, or transforming
+    </div>
+  </div>
+</div>
+<div class="mudra-box">
+  <div class="mudra-header" onclick="toggleMudra(this)">
+    <span class="arrow">&#9654;</span>
+    <span class="mudra-title">Ardhapathaka Mudra</span>
+  </div>
+  <div class="mudra-content">
+    <img src="images/ardhapathaka.jpeg" width="200" height="200" alt="Ardhapathaka Mudra">
+    <div class="mudra-description">
+      The Ardhapataka hasta mudra, a single-hand gesture in Bharatanatyam, signifies various concepts like leaves, a writing board, the bank of a river, and the number both or two
+    </div>
+  </div>
+</div>
+<div class="mudra-box">
+  <div class="mudra-header" onclick="toggleMudra(this)">
+    <span class="arrow">&#9654;</span>
+    <span class="mudra-title">Kartarimukha Mudra</span>
+  </div>
+  <div class="mudra-content">
+    <img src="images/kartarimukha.jpg" width="200" height="200" alt="Kartarimukha Mudra">
+    <div class="mudra-description">
+      This mudra is primarily used to depict separation, division, opposition, or conflict in storytelling and dance sequences. It can also represent lightning, falling, or even the corner of an eye
+    </div>
+  </div>
+</div>
+<div class="mudra-box">
+  <div class="mudra-header" onclick="toggleMudra(this)">
+    <span class="arrow">&#9654;</span>
+    <span class="mudra-title">Mayura Mudra</span>
+  </div>
+  <div class="mudra-content">
+    <img src="images/mayura.jpeg" width="200" height="200" alt="Mayura Mudra">
+    <div class="mudra-description">
+      This mudra signifies peacock, a creeper, a bird, vomiting, combing hair, anointing the forehead, scattering water, and discussing scriptures
+    </div>
+  </div>
+</div>
+<style>
+    .mudra-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+    .mudra-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .arrow.down {
+      transform: rotate(90deg);
+    }
+
+    .mudra-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .mudra-content img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .mudra-description {
+      margin-top: 8px;
+    }
+  </style>
+<script>
+  function toggleMudra(header) {
+    const arrow = header.querySelector('.arrow');
+    const content = header.nextElementSibling;
+
+    arrow.classList.toggle('down');
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  }
+</script>
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const videoElement = document.getElementById('input_video');
+        const canvasElement = document.getElementById('output_canvas');
+        const resultText = document.getElementById('result');
+        const canvasCtx = canvasElement.getContext('2d');
+
+        const hands = new Hands({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        });
+
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.7,
+            minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(async (results) => {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+                const landmarks = results.multiHandLandmarks[0];
+                drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 4 });
+                drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 2 });
+
+                const keypoints = [];
+                landmarks.forEach(lm => {
+                    keypoints.push(lm.x, lm.y, lm.z);
+                });
+
+                if (keypoints.length === 63) {
+                    try {
+                        const response = await fetch("http://localhost:5000/predict", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ keypoints })
+                        });
+
+                        const data = await response.json();
+                        if (data.label) {
+                            resultText.innerText = `Prediction: ${data.label} (${(data.confidence * 100).toFixed(1)}%)`;
+                        } else {
+                            resultText.innerText = `Prediction: Not confident enough`;
+                        }
+                    } catch (error) {
+                        resultText.innerText = "Error connecting to server.";
+                    }
+                }
+            } else {
+                resultText.innerText = "No hand detected.";
+            }
+
+            canvasCtx.restore();
+        });
+
+        let camera;
+
+        startBtn.addEventListener('click', () => {
+            const errorText = document.getElementById('camera-error');
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'inline-block';
+            videoElement.style.display = 'block';
+            canvasElement.style.display = 'block';
+            resultText.style.display = 'block';
+            document.getElementById('video-overlay').style.display = 'none';
+            camera = new Camera(videoElement, {
+                onFrame: async () => {
+                    await hands.send({ image: videoElement });
+                },
+                width: 640,
+                height: 480
+            });
+
+        try {
+        camera.start();
+        } catch (err) {
+        console.error("Camera failed to start:", err);
+        errorText.style.display = 'block';  // Show camera error message
+        startBtn.style.display = 'inline-block';  // Re-enable start button
+        stopBtn.style.display = 'none';
+        videoElement.style.display = 'none';
+        canvasElement.style.display = 'none';
+        document.getElementById('video-overlay').style.display = 'flex';
+    }
+});
+
+        stopBtn.addEventListener('click', () => {
+            if (camera) camera.stop();
+            videoElement.style.display = 'none';
+            canvasElement.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            resultText.innerText = 'Prediction: ...';
+            document.getElementById('video-overlay').style.display = 'flex';
+        });
+    </script>
+
+</body>
+</div>
+<footer>
+    <p>© 2025 Hastantrika | Created by Nidhi M R</p>
+    <p>Contact:nidhirameshmb@gmail.com</p>
+</footer>
+<style>
+footer {
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px;
+}
+
+</style>
+</html>
