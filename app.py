@@ -1,19 +1,17 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify,render_template
 from flask_cors import CORS
 from tensorflow.keras.models import load_model
 import numpy as np
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # 👈 Add this line to enable CORS
 
 model = load_model("new_hand_landmark_classifier.h5", compile=False)
 label_map = ['Ardhapathaka', 'Kartarimukha', 'Mayura', 'Pathaka', 'Tripathaka']
 
-@app.route('/')
 def home():
-    return render_template("index.html")  # Serve the frontend HTML
-
+    return render_template('index.html')
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -33,10 +31,6 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/health')
-def health():
-    return "ok", 200
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Use PORT env variable if present
+    app.run(host='0.0.0.0', port=port)
