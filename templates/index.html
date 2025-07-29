@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hastantrika</title>
-    <link rel="icon" type="image/png" href="iconmage.webp" />
+    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='iconmage.webp') }}" />
 
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
@@ -130,7 +130,7 @@
     <span class="mudra-title">Pataka Mudra</span>
   </div>
   <div class="mudra-content">
-    <img src="images/pathaka.jpg" width="200" height="200" alt="Pathaka Mudra">
+    <img src="{{ url_for('static', filename='images/pathaka.jpg') }}" alt="Pathaka" />
     <div class="mudra-description">
       This mudra represents a wide range of meanings, including the sky, mountains, a flag, a river, and various actions like starting a dance, denoting the wind, or indicating a cutting action.
     </div>
@@ -142,7 +142,7 @@
     <span class="mudra-title">Tripathaka Mudra</span>
   </div>
   <div class="mudra-content">
-    <img src="images/tripathaka.jpeg" width="200" height="200" alt="Tripathaka Mudra">
+    <img src="{{ url_for('static', filename='images/tripathaka.jpeg') }}" alt="Tripathaka" />
     <div class="mudra-description">
       It's used to represent a variety of concepts, including royal elements like a crown or king, trees, Indra (a deity), the weapon Vajra, a Ketaki flower, a lamp, flames of fire, a pigeon, and even actions like writing, drawing patterns, or transforming
     </div>
@@ -154,7 +154,7 @@
     <span class="mudra-title">Ardhapathaka Mudra</span>
   </div>
   <div class="mudra-content">
-    <img src="images/ardhapathaka.jpeg" width="200" height="200" alt="Ardhapathaka Mudra">
+    <img src="{{ url_for('static', filename='images/ardhapathaka.jpeg') }}" alt="Ardhapathaka" />
     <div class="mudra-description">
       The Ardhapataka hasta mudra, a single-hand gesture in Bharatanatyam, signifies various concepts like leaves, a writing board, the bank of a river, and the number both or two
     </div>
@@ -166,7 +166,8 @@
     <span class="mudra-title">Kartarimukha Mudra</span>
   </div>
   <div class="mudra-content">
-    <img src="images/kartarimukha.jpg" width="200" height="200" alt="Kartarimukha Mudra">
+    <img src="{{ url_for('static', filename='images/kartarimukha.jpeg') }}" alt="Kartarimukha" />
+
     <div class="mudra-description">
       This mudra is primarily used to depict separation, division, opposition, or conflict in storytelling and dance sequences. It can also represent lightning, falling, or even the corner of an eye
     </div>
@@ -178,7 +179,8 @@
     <span class="mudra-title">Mayura Mudra</span>
   </div>
   <div class="mudra-content">
-    <img src="images/mayura.jpeg" width="200" height="200" alt="Mayura Mudra">
+    <img src="{{ url_for('static', filename='images/mayura.jpeg') }}" alt="Mayura" />
+
     <div class="mudra-description">
       This mudra signifies peacock, a creeper, a bird, vomiting, combing hair, anointing the forehead, scattering water, and discussing scriptures
     </div>
