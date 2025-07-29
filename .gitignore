@@ -1,0 +1,34 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model weights
+*.h5
+*.pb
+*.tflite
+
+# Logs and runtime files
+*.log
+
+# VSCode or PyCharm
+.vscode/
+.idea/
+
+# Environment variables or secrets
+.env
+
+# Gunicorn PID files
+*.pid
+
+# Static build files (optional, if auto-generated)
+build/
+dist/
