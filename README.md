@@ -1,4 +1,4 @@
-# HASTANTRIKA-Bharathnatyam-Mudra-Detector
+# HASTANTRIKA-Bharatanatyam-Mudra-Detector
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://bharathnatyam-mudra-detector.onrender.com/)
 
 A real-time Bharatanatyam Hasta Mudra detection web app using **MediaPipe** and a trained **MLP model**, served with Flask and displayed in a responsive HTML/CSS/JavaScript frontend.  
