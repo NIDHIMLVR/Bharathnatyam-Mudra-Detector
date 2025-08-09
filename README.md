@@ -75,12 +75,15 @@ You can run the app locally if you wish to test or modify it:
    git clone https://github.com/yourusername/HASTANTRIKA-Bharathnatyam-Mudra-Detector.git
    cd HASTANTRIKA-Bharathnatyam-Mudra-Detector
 2. Create virtual environment:
+    ```bash
    python -m venv venv
    source venv/bin/activate  # Mac/Linux
    venv\Scripts\activate     # Windows
-4. Install dependencies:
+3. Install dependencies:
+    ```bash
    pip install -r requirements.txt
-5. Run python flask server:
+4. Run python flask server:
+    ```bash
    python app.py
 
 ## Usage
