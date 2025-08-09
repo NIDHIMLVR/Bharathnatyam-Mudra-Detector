@@ -15,17 +15,17 @@ A real-time Bharatanatyam Hasta Mudra detection web app using **MediaPipe** and 
 ## Overview
 The Hastantrika App detects and classifies 5 Bharatanatyam hand gestures(Mudras) in real-time from webcam input.It uses MediaPipe Hands to extract landmarks, which are then passed to a trained MLP classifier to predict the mudra.The app also displays the mudra name and a description alongside an image reference.
 ## Features
-### 🎥 Real-time webcam detection of 5 Hasta Mudras.
+### 1. Real-time webcam detection of 5 Hasta Mudras.
 
 <img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/17635da7-e0e9-4788-b40c-d5c6d3c62321" />
 
 
-### 🖐 MediaPipe landmark extraction for accurate gesture recognition.
+### 2. MediaPipe landmark extraction for accurate gesture recognition.
 ![WhatsApp Image 2025-08-09 at 18 35 56](https://github.com/user-attachments/assets/669eae49-b6ca-4dce-968f-c922cfb6a725)
 
 
 
-### 🧠 MLP model trained on custom Bharatanatyam mudra dataset.
+### 3. MLP model trained on custom Bharatanatyam mudra dataset.
 
 Input layer: 63 features (21 landmarks × 3 coordinates)
 
@@ -35,13 +35,13 @@ Hidden Layer 2: 64 neurons, ReLU
 
 Output layer: 5 neurons, Softmax
 
-### 🌐 Responsive frontend (works on mobile & tablet).
+### 3. Responsive frontend (works on mobile & tablet).
 
 <img width="400" height="600" alt="image" src="https://github.com/user-attachments/assets/c518b697-7565-4095-a1d7-f8626578165b" />
 
 
 
-### Mudra image & description display for learning purposes.
+### 4. Mudra image & description display for learning purposes.
 <img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/9564dfe2-2dd0-45a6-a605-6ad42e9df61b" />
 
 ## Tech Stack
