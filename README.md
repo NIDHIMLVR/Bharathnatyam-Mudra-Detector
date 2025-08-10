@@ -1,6 +1,11 @@
 # HASTANTRIKA-Bharatanatyam-Mudra-Detector
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://bharathnatyam-mudra-detector.onrender.com/)
 
+## Project Motivation
+
+I created this Hasta Mudra Detector model during my 6th to 7th semester vacation because I wanted to combine my passion for Bharatanatyam dance with my interest in Artificial Intelligence. This project reflects my enthusiasm for both traditional art and modern technology, aiming to help dancers by recognizing and validating classical hand gestures using computer vision and machine learning.
+
+
 A real-time Bharatanatyam Hasta Mudra detection web app using **MediaPipe** and a trained **MLP model**, served with Flask and displayed in a responsive HTML/CSS/JavaScript frontend.  
 ## 📖 Table of Contents
 1. [Overview](#overview)  
